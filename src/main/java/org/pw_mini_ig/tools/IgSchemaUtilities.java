@@ -22,6 +22,10 @@ import java.util.function.Consumer;
 public class IgSchemaUtilities {
     private static final JsonValidationService service = JsonValidationService.newInstance();
 
+    /**
+     * @param rootElement Root element of IG grammar
+     * @return Generated YAML file
+     */
     public static String generateYaml(RootElement rootElement) {
         DumperOptions options = getOptions();
         Representer representer = getCustomRepresenter();
