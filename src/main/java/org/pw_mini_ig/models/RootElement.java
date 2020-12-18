@@ -4,13 +4,18 @@ import java.util.Collection;
 import java.util.Objects;
 
 public class RootElement {
-    private SchemaMode mode = SchemaMode.strict;
+    private SchemaMode mode;
     private String text;
     private Collection<Statement> statements;
 
     public RootElement(String text, Collection<Statement> statements) {
+        this(text, statements, SchemaMode.permissive);
+    }
+
+    public RootElement(String text, Collection<Statement> statements, SchemaMode mode) {
         setText(text);
         setStatements(statements);
+        setMode(mode);
     }
 
     public SchemaMode getMode() {
