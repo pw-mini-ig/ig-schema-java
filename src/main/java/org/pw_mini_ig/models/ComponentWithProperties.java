@@ -1,4 +1,4 @@
 package org.pw_mini_ig.models;
 
-public interface ComponentWithProperties {
+public interface ComponentWithProperties extends StatementOrComponentWithProperties {
 }

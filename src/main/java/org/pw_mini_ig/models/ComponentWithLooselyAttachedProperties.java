@@ -3,7 +3,7 @@ package org.pw_mini_ig.models;
 import java.util.Collection;
 import java.util.Objects;
 
-public class ComponentWithLooselyAttachedProperties implements ComponentWithProperties, StatementOrComponentWithProperties {
+public class ComponentWithLooselyAttachedProperties implements ComponentWithProperties {
 
     private SimpleNode element;
     private Collection<StatementOrComponentWithProperties> properties;
