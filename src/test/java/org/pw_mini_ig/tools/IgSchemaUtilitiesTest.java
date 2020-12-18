@@ -12,36 +12,36 @@ import static org.junit.jupiter.api.Assertions.*;
 class IgSchemaUtilitiesTest {
     @Test
     public void ShouldProperlyGenerateYaml() {
-        RootElement root = prepareTestCase1();
+        RootElement root = prepareTestCaseStrict1();
         String yaml = IgSchemaUtilities.generateYaml(root);
         Collection<String> errors = IgSchemaUtilities.validateYaml(yaml);
 
         assertTrue(errors.isEmpty());
     }
 
-    private RootElement prepareTestCase1() {
-        Collection<Statement> statements = new ArrayList<>();
-        RootElement rootElement = new RootElement("The State requires employers to provide notification to employees of the availability of " +
+    private RootElement prepareTestCaseStrict1() {
+        var statements = new ArrayList<Statement>();
+        var rootElement = new RootElement("The State requires employers to provide notification to employees of the availability of " +
                 "unemployment compensation at the time of separation from employment.", statements);
 
-        ComponentWithProperties regAttribute = new SimpleNode("The State", 0, 9);
-        ComponentWithoutProperties regAim = new SimpleNode("requires", 10, 8);
+        var regAttribute = new SimpleNode("The State", 0, 9);
+        var regAim = new SimpleNode("requires", 10, 8);
 
-        RegulativeStatement regulativeStatement = new RegulativeStatement(regAttribute, regAim, AtomicStatementType.institutionalStatement, "The State requires employers to provide notification to employees of the availability of " +
-                " unemployment compensation at the time of separation from employment.", 0, 156);
+        var regulativeStatement = new RegulativeStatement(regAttribute, regAim, AtomicStatementType.institutionalStatement,
+                "The State requires employers to provide notification to employees of the availability of " +
+                "unemployment compensation at the time of separation from employment.", 0, 156);
         statements.add(regulativeStatement);
 
+        var dirRegAttribute = new SimpleNode("employers", 19, 9);
+        var dirRegAim = new SimpleNode("requires", 29, 10);
 
-        ComponentWithProperties dirRegAttribute = new SimpleNode("employers", 19, 9);
-        ComponentWithoutProperties dirRegAim = new SimpleNode("requires", 29, 10);
-
-        RegulativeStatement directObjectStatement = new RegulativeStatement(dirRegAttribute, dirRegAim, AtomicStatementType.institutionalStatement,
+        var directObjectStatement = new RegulativeStatement(dirRegAttribute, dirRegAim, AtomicStatementType.institutionalStatement,
                 "employers to provide notification to employees of the availability of " +
                         " unemployment compensation at the time of separation from employment.", 19, 137);
         regulativeStatement.setDirectObject(directObjectStatement);
 
 
-        StatementOrComponentWithProperties dirDirObject = new ComponentWithLooselyAttachedProperties(
+        var dirDirObject = new ComponentWithLooselyAttachedProperties(
                 new SimpleNode("notification", 40, 12),
                 new ArrayList<>(
                         List.of(new SimpleNode("of the availability of unemployment compensation", 66, 48))
