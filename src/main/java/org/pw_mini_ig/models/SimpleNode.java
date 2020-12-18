@@ -1,6 +1,6 @@
 package org.pw_mini_ig.models;
 
-public class SimpleNode extends TextSpan implements ComponentWithProperties, ComponentWithoutProperties, StatementOrComponentWithProperties {
+public class SimpleNode extends TextSpan implements ComponentWithProperties, ComponentWithoutProperties {
     public SimpleNode(String text) {
         super(text);
     }

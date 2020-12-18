@@ -3,7 +3,7 @@ package org.pw_mini_ig.models;
 import java.util.Collection;
 import java.util.Objects;
 
-public class ComponentWithPropertiesCombination implements ComponentWithProperties, StatementOrComponentWithProperties {
+public class ComponentWithPropertiesCombination implements ComponentWithProperties {
     private LogicalOperator logicalOperator;
     private Collection<ComponentWithProperties> components;
 
