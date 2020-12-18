@@ -2,12 +2,12 @@ package org.pw_mini_ig.models;
 
 import java.util.Objects;
 
-public class AbstractAtomicStatement extends AbstractStatement {
+public abstract class AbstractAtomicStatement extends AbstractStatement {
 
     protected AtomicStatementType type;
     protected SimpleNode deontic;
-    protected ComponentWithoutProperties activationCondition;
-    protected ComponentWithoutProperties executionConstraint;
+    protected StatementOrComponentWithoutProperties activationCondition;
+    protected StatementOrComponentWithoutProperties executionConstraint;
 
     public AbstractAtomicStatement(AtomicStatementType type, String text) {
         super(text);
@@ -26,6 +26,7 @@ public class AbstractAtomicStatement extends AbstractStatement {
     public void setType(AtomicStatementType type) {
         if (this.type != null) {
             // Cannot change type
+            // TODO: throw an exception
             return;
         }
         Objects.requireNonNull(type);
@@ -38,30 +39,32 @@ public class AbstractAtomicStatement extends AbstractStatement {
 
     public void setDeontic(SimpleNode deontic) {
         if (type.equals(AtomicStatementType.statementOfFact)) {
+            // TODO: operations like this should throw an exception
             return;
         }
         this.deontic = deontic;
     }
 
-    public ComponentWithoutProperties getActivationCondition() {
+    public StatementOrComponentWithoutProperties getActivationCondition() {
         return activationCondition;
     }
 
-    public void setActivationCondition(ComponentWithoutProperties activationCondition) {
+    public void setActivationCondition(StatementOrComponentWithoutProperties activationCondition) {
         this.activationCondition = activationCondition;
     }
 
-    public ComponentWithoutProperties getExecutionConstraint() {
+    public StatementOrComponentWithoutProperties getExecutionConstraint() {
         return executionConstraint;
     }
 
-    public void setExecutionConstraint(ComponentWithoutProperties executionConstraint) {
+    public void setExecutionConstraint(StatementOrComponentWithoutProperties executionConstraint) {
         this.executionConstraint = executionConstraint;
     }
 
     @Override
     public void setOrElse(Statement orElse) {
         if (type.equals(AtomicStatementType.statementOfFact)) {
+            // TODO: should throw an exception
             return;
         }
         super.setOrElse(orElse);

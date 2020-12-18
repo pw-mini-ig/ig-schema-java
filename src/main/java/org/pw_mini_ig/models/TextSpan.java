@@ -2,7 +2,7 @@ package org.pw_mini_ig.models;
 
 import java.util.Objects;
 
-public class TextSpan {
+public abstract class TextSpan {
     public enum TextSpanMode {
         TextOnly,
         WithBeginAndLength

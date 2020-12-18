@@ -2,7 +2,7 @@ package org.pw_mini_ig.models;
 
 import java.util.Objects;
 
-public class RegulativeStatement extends AbstractAtomicStatement implements Statement, StatementOrComponentWithProperties, ComponentWithoutProperties {
+public class RegulativeStatement extends AbstractAtomicStatement {
 
     private ComponentWithProperties attribute;
     private StatementOrComponentWithProperties directObject;

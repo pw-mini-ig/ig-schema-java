@@ -1,6 +1,6 @@
 package org.pw_mini_ig.models;
 
-public class AbstractStatement extends TextSpan {
+public abstract class AbstractStatement extends TextSpan implements Statement {
 
     protected boolean inversion = false;
     protected Statement orElse;

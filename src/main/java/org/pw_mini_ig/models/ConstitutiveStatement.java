@@ -2,7 +2,7 @@ package org.pw_mini_ig.models;
 
 import java.util.Objects;
 
-public class ConstitutiveStatement extends AbstractAtomicStatement implements Statement, StatementOrComponentWithProperties, ComponentWithoutProperties {
+public class ConstitutiveStatement extends AbstractAtomicStatement {
 
     private ComponentWithProperties constitutedEntity;
     private ComponentWithoutProperties constitutiveFunction;

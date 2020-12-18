@@ -3,7 +3,7 @@ package org.pw_mini_ig.models;
 import java.util.Collection;
 import java.util.Objects;
 
-public class StatementCombination extends AbstractStatement implements Statement, StatementOrComponentWithProperties, ComponentWithoutProperties {
+public class StatementCombination extends AbstractStatement {
 
     private LogicalOperator logicalOperator;
     private Collection<Statement> statements;
