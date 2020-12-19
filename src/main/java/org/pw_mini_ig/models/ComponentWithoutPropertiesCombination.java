@@ -1,5 +1,7 @@
 package org.pw_mini_ig.models;
 
+import org.pw_mini_ig.exceptions.InvalidIGDefinitionException;
+
 import java.util.Collection;
 import java.util.Objects;
 
@@ -8,7 +10,7 @@ public class ComponentWithoutPropertiesCombination implements ComponentWithoutPr
     private LogicalOperator logicalOperator;
     private Collection<ComponentWithoutProperties> components;
 
-    public ComponentWithoutPropertiesCombination(LogicalOperator logicalOperator, Collection<ComponentWithoutProperties> components) {
+    public ComponentWithoutPropertiesCombination(LogicalOperator logicalOperator, Collection<ComponentWithoutProperties> components) throws InvalidIGDefinitionException {
         setLogicalOperator(logicalOperator);
         setComponents(components);
     }
@@ -26,10 +28,10 @@ public class ComponentWithoutPropertiesCombination implements ComponentWithoutPr
         return components;
     }
 
-    public void setComponents(Collection<ComponentWithoutProperties> components) {
+    public void setComponents(Collection<ComponentWithoutProperties> components) throws InvalidIGDefinitionException {
         Objects.requireNonNull(components);
         if (components.size() < 2) {
-            throw new IllegalArgumentException("components argument must be a collection with at least 2 elements");
+            throw new InvalidIGDefinitionException("components argument must be a collection with at least 2 elements");
         }
         this.components = components;
     }

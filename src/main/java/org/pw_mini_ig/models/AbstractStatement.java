@@ -1,5 +1,7 @@
 package org.pw_mini_ig.models;
 
+import org.pw_mini_ig.exceptions.InvalidIGDefinitionException;
+
 public abstract class AbstractStatement extends TextSpan implements Statement {
 
     protected boolean inversion = false;
@@ -17,7 +19,7 @@ public abstract class AbstractStatement extends TextSpan implements Statement {
         return orElse;
     }
 
-    public void setOrElse(Statement orElse) {
+    public void setOrElse(Statement orElse) throws InvalidIGDefinitionException {
         this.orElse = orElse;
     }
 

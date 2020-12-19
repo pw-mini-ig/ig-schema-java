@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.pw_mini_ig.exceptions.InvalidIGDefinitionException;
 import org.pw_mini_ig.models.*;
 
 import java.util.ArrayList;
@@ -26,14 +27,14 @@ class IgSchemaUtilitiesTest {
         assertTrue(errors.isEmpty());
     }
 
-    private static Stream<Arguments> ShouldProperlyGenerateYaml() {
+    private static Stream<Arguments> ShouldProperlyGenerateYaml() throws InvalidIGDefinitionException {
         return Stream.of(
                 Arguments.of(prepareTestCaseStrict1()),
                 Arguments.of(prepareTestCasePermissive1())
         );
     }
 
-    private static RootElement prepareTestCaseStrict1() {
+    private static RootElement prepareTestCaseStrict1() throws InvalidIGDefinitionException {
         var statements = new ArrayList<Statement>();
         var rootElement = new RootElement(
                 "The State requires employers to provide notification to employees of the availability of " +
@@ -74,7 +75,7 @@ class IgSchemaUtilitiesTest {
         return rootElement;
     }
 
-    private static RootElement prepareTestCasePermissive1() {
+    private static RootElement prepareTestCasePermissive1() throws InvalidIGDefinitionException {
         var statements = new ArrayList<Statement>();
         var rootElement = new RootElement("The State requires employers to provide notification to employees of the availability of " +
                 "unemployment compensation at the time of separation from employment.", statements);

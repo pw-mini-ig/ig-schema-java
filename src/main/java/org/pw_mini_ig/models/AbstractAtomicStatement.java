@@ -1,5 +1,7 @@
 package org.pw_mini_ig.models;
 
+import org.pw_mini_ig.exceptions.InvalidIGDefinitionException;
+
 import java.util.Objects;
 
 public abstract class AbstractAtomicStatement extends AbstractStatement {
@@ -11,23 +13,29 @@ public abstract class AbstractAtomicStatement extends AbstractStatement {
 
     public AbstractAtomicStatement(AtomicStatementType type, String text) {
         super(text);
-        setType(type);
+        try {
+            setType(type);
+        } catch (InvalidIGDefinitionException e) {
+           // Cannot happen
+        }
     }
 
     public AbstractAtomicStatement(AtomicStatementType type, String text, int begin, int length) {
         super(text, begin, length);
-        setType(type);
+        try {
+            setType(type);
+        } catch (InvalidIGDefinitionException e) {
+            // Cannot happen
+        }
     }
 
     public AtomicStatementType getType() {
         return type;
     }
 
-    public void setType(AtomicStatementType type) {
+    public void setType(AtomicStatementType type) throws InvalidIGDefinitionException {
         if (this.type != null) {
-            // Cannot change type
-            // TODO: throw an exception
-            return;
+            throw new InvalidIGDefinitionException("Cannot change type. You have to create another object.");
         }
         Objects.requireNonNull(type);
         this.type = type;
@@ -37,10 +45,9 @@ public abstract class AbstractAtomicStatement extends AbstractStatement {
         return deontic;
     }
 
-    public void setDeontic(SimpleNode deontic) {
+    public void setDeontic(SimpleNode deontic) throws InvalidIGDefinitionException {
         if (type.equals(AtomicStatementType.statementOfFact)) {
-            // TODO: operations like this should throw an exception
-            return;
+            throw new InvalidIGDefinitionException(String.format("Deontic cannot have value for %s type", AtomicStatementType.statementOfFact.toString()));
         }
         this.deontic = deontic;
     }
@@ -62,10 +69,9 @@ public abstract class AbstractAtomicStatement extends AbstractStatement {
     }
 
     @Override
-    public void setOrElse(Statement orElse) {
+    public void setOrElse(Statement orElse) throws InvalidIGDefinitionException {
         if (type.equals(AtomicStatementType.statementOfFact)) {
-            // TODO: should throw an exception
-            return;
+            throw new InvalidIGDefinitionException(String.format("SetOrElse cannot have value for %s type", AtomicStatementType.statementOfFact.toString()));
         }
         super.setOrElse(orElse);
     }
