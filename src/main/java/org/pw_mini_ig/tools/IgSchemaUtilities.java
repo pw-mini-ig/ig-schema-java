@@ -63,6 +63,8 @@ public class IgSchemaUtilities {
         representer.addClassTag(ComponentWithPropertiesCombination.class, Tag.MAP);
         representer.addClassTag(ComponentWithLooselyAttachedProperties.class, Tag.MAP);
         representer.addClassTag(ComponentWithoutPropertiesCombination.class, Tag.MAP);
+        representer.addClassTag(StatementOrComponentWithPropertiesCombination.class, Tag.MAP);
+        representer.addClassTag(StatementOrComponentWithoutPropertiesCombination.class, Tag.MAP);
 
         return representer;
     }
