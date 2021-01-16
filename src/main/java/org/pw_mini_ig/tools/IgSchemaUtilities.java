@@ -20,8 +20,6 @@ import java.util.Collection;
 import java.util.function.Consumer;
 
 public class IgSchemaUtilities {
-    private static final JsonValidationService service = JsonValidationService.newInstance();
-
     /**
      * @param rootElement Root element of IG grammar
      * @return Generated YAML file
@@ -39,13 +37,14 @@ public class IgSchemaUtilities {
      * @return Collection of errors, if there are any
      */
     public static Collection<String> validateYaml(String yamlFileContent) {
+        JsonValidationService service = JsonValidationService.newInstance();
         InputStream stream = new ByteArrayInputStream(yamlFileContent.getBytes(StandardCharsets.UTF_8));
 
         IgSchemaUtilities instance = new IgSchemaUtilities();
         InputStream jsonSchema = instance.getFileFromResourceAsStream("ig-schema.json");
 
         JsonSchema schema = service.readSchema(jsonSchema);
-        return validateUsingJsonParser(schema, stream);
+        return validateUsingJsonParser(schema, stream, service);
     }
 
     private static CustomRepresenter getCustomRepresenter() {
@@ -75,7 +74,7 @@ public class IgSchemaUtilities {
         return options;
     }
 
-    private static Collection<String> validateUsingJsonParser(JsonSchema schema, InputStream yamlToTest) {
+    private static Collection<String> validateUsingJsonParser(JsonSchema schema, InputStream yamlToTest, JsonValidationService service) {
         ErrorSaver errorSaver = new ErrorSaver();
 
         ProblemHandler handler = service.createProblemPrinter(errorSaver);
